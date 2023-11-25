@@ -1,4 +1,0 @@
-export const USER_ID_REQUEST = 'USER_ID_REQUEST';
-export const USER_ID_SUCCESS = 'USER_ID_SUCCESS';
-export const USER_ID_ERROR = 'USER_ID_ERROR';
-

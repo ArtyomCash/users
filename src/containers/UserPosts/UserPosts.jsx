@@ -1,18 +1,19 @@
-// UserPosts.js
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const UserPosts = ({ userId }) => {
+const UserPosts = () => {
+  const { id } = useParams();
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+    fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
       .then((response) => response.json())
       .then((json) => setUserPosts(json));
-  }, [userId]);
+  }, [id]);
 
   return (
     <div>
-      <h2>Posts by User {userId}</h2>
+      <h2>Posts by User {}</h2>
       <ul>
         {userPosts.map((post) => (
           <li key={post.id}>

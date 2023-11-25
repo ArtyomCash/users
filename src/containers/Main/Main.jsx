@@ -16,30 +16,13 @@ const Main = () => {
   const uniqueUsers =
     postList && Array.from(new Set(postList.map((post) => post.userId)));
 
-  console.log('uniqueUsers', uniqueUsers);
-
-  const userRoutes = uniqueUsers
-    ? uniqueUsers.map((userId, index) => (
-        <Route
-          key={index}
-          path={`/user/${userId}`}
-          element={<UserPosts userId={userId} />}
-        />
-      ))
-    : null;
-
   return (
     <main className={styles.main}>
       <h1>Users list</h1>
       {uniqueUsers &&
         uniqueUsers.map((userId, index) => (
-          <React.Fragment key={index}>
-            <p>
-              <Link to={`/user/${userId}`}>User name {userId}</Link>
-            </p>
-          </React.Fragment>
+          <Link to={`/user-posts/${userId}`} key={index}>User name {userId}</Link>
         ))}
-      {/*<Routes>{userRoutes}</Routes>*/}
     </main>
   );
 };

@@ -3,3 +3,14 @@
 .userPosts {
   @extend %wrapper;
 }
+.li {
+  margin-bottom: 32px;
+}
+.title {
+  @extend %subTitle;
+}
+.desc {
+  font-size: 18px;
+  line-height: 18px;
+  color: black;
+}

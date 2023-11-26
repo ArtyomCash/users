@@ -42,7 +42,7 @@ const Main = () => {
     <>
       <Header />
       <main className={styles.main}>
-        <h1 className={styles.title}>Users list</h1>
+        <h1 className={styles.title}>Users list - Hello!</h1>
         <article className={styles.searchBox}>
           <input
             className={styles.input}

@@ -5,12 +5,31 @@ import styles from './main.module.scss';
 const Main = () => {
   const [postList, setPostList] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
       .then((json) => setPostList(json));
   }, []);
+
+  const handleSort = () => {
+    const sortedUsers = [...postList];
+
+    sortedUsers.sort((a, b) => {
+      const nameA = a.username.toLowerCase();
+      const nameB = b.username.toLowerCase();
+
+      if (sortOrder === 'asc') {
+        return nameA.localeCompare(nameB);
+      } else {
+        return nameB.localeCompare(nameA);
+      }
+    });
+
+    setPostList(sortedUsers);
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
 
   const filteredUsers = postList
     ? postList.filter((user) =>
@@ -28,6 +47,9 @@ const Main = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+        <button onClick={handleSort}>
+          Sort by username ({sortOrder === 'asc' ? 'asc' : 'desc'})
+        </button>
       </div>
       <section className={styles.wrapper}>
         {filteredUsers &&

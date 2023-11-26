@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../../components/header';
 import styles from './main.module.scss';
 
 const Main = () => {
@@ -38,31 +39,36 @@ const Main = () => {
     : [];
 
   return (
-    <main className={styles.main}>
-      <h1>Users list</h1>
-      <div>
-        <input
-          type='text'
-          placeholder='Search by username'
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button onClick={handleSort}>
-          Sort by username ({sortOrder === 'asc' ? 'asc' : 'desc'})
-        </button>
-      </div>
-      <section className={styles.wrapper}>
-        {filteredUsers &&
-          filteredUsers.map((user) => (
-            <Link
-              to={`/user-posts/${user.id}`}
-              state={{ username: user.username }}
-              key={user.id}>
-              User name {user.username}
-            </Link>
-          ))}
-      </section>
-    </main>
+    <>
+      <Header />
+      <main className={styles.main}>
+        <h1 className={styles.title}>Users list</h1>
+        <article className={styles.searchBox}>
+          <input
+            className={styles.input}
+            type='text'
+            placeholder='Search by username'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button className={styles.searchBtn} onClick={() => handleSort()} type='button'>
+            Sort by username
+          </button>
+        </article>
+        <section className={styles.wrapper}>
+          {filteredUsers &&
+            filteredUsers.map((user) => (
+              <Link
+                className={styles.link}
+                to={`/user-posts/${user.id}`}
+                state={{ username: user.username }}
+                key={user.id}>
+                {user.username}
+              </Link>
+            ))}
+        </section>
+      </main>
+    </>
   );
 };
 

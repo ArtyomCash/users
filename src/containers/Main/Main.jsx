@@ -54,7 +54,10 @@ const Main = () => {
       <section className={styles.wrapper}>
         {filteredUsers &&
           filteredUsers.map((user) => (
-            <Link to={`/user-posts/${user.id}`} key={user.id}>
+            <Link
+              to={`/user-posts/${user.id}`}
+              state={{ username: user.username }}
+              key={user.id}>
               User name {user.username}
             </Link>
           ))}

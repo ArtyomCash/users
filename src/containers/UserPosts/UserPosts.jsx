@@ -6,6 +6,8 @@ import styles from './userPosts.module.scss';
 const UserPosts = () => {
   const { id } = useParams();
 
+  console.log('id', id);
+
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {

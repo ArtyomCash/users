@@ -1,7 +1,5 @@
-// Main.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import UserPosts from '../../containers/UserPosts';
+import { Link } from 'react-router-dom';
 import styles from './main.module.scss';
 
 const Main = () => {
@@ -19,10 +17,14 @@ const Main = () => {
   return (
     <main className={styles.main}>
       <h1>Users list</h1>
-      {uniqueUsers &&
-        uniqueUsers.map((userId, index) => (
-          <Link to={`/user-posts/${userId}`} key={index}>User name {userId}</Link>
-        ))}
+      <section className={styles.wrapper}>
+        {uniqueUsers &&
+          uniqueUsers.map((userId, index) => (
+            <Link to={`/user-posts/${userId}`} key={index}>
+              User name {userId}
+            </Link>
+          ))}
+      </section>
     </main>
   );
 };

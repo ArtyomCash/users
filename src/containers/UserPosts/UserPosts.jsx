@@ -5,33 +5,35 @@ import { useLocation } from 'react-router-dom';
 import styles from './userPosts.module.scss';
 
 const UserPosts = () => {
+  const [userPosts, setUserPosts] = useState([]);
+  const [show, setShow] = useState(false);
   // const { id } = useParams();
   const location = useLocation();
-  const [userPosts, setUserPosts] = useState([]);
-
+  const url = location.pathname.split('/');
   useEffect(() => {
-    const url = location.pathname.split('/');
-
-    console.log('url', url);
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${url[2]}`)
       .then((response) => response.json())
       .then((json) => setUserPosts(json));
-  });
+  }, [url]);
+
+  setTimeout(() => setShow(true), 500);
 
   return (
-    <>
-      <Header />
-      <main className={styles.userPosts}>
-        <ul>
-          {userPosts.map((post) => (
-            <li className={styles.li} key={post.id}>
-              <h3 className={styles.title}>{post.title}</h3>
-              <p className={styles.desc}>{post.body}</p>
-            </li>
-          ))}
-        </ul>
-      </main>
-    </>
+    show && (
+      <>
+        <Header />
+        <main className={styles.userPosts}>
+          <ul>
+            {userPosts.map((post) => (
+              <li className={styles.li} key={post.id}>
+                <h3 className={styles.title}>{post.title}</h3>
+                <p className={styles.desc}>{post.body}</p>
+              </li>
+            ))}
+          </ul>
+        </main>
+      </>
+    )
   );
 };
 

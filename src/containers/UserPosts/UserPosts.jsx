@@ -7,14 +7,13 @@ import styles from './userPosts.module.scss';
 const UserPosts = () => {
   // const { id } = useParams();
 
-  const location = useLocation();
-  const url = location.pathname.split('/');
-
-  console.log('url', url);
-
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
+    const location = useLocation();
+    const url = location.pathname.split('/');
+
+    console.log('url', url);
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${url[2]}`)
       .then((response) => response.json())
       .then((json) => setUserPosts(json));

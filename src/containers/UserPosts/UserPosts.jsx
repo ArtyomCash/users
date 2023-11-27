@@ -10,6 +10,8 @@ const UserPosts = () => {
   const location = useLocation();
   const url = location.pathname.split('/');
 
+  console.log('url', url);
+
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {

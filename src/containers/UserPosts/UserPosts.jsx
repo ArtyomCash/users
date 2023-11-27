@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+// import { useParams } from 'react-router-dom';
 import Header from '../../components/header';
 import { useLocation } from 'react-router-dom';
 import styles from './userPosts.module.scss';
 
 const UserPosts = () => {
+  // const { id } = useParams();
+
   const location = useLocation();
   const url = location.pathname.split('/');
 
@@ -13,7 +16,7 @@ const UserPosts = () => {
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${url[2]}`)
       .then((response) => response.json())
       .then((json) => setUserPosts(json));
-  }, []);
+  }, [url]);
 
   return (
     <>

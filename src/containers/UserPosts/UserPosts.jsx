@@ -14,7 +14,7 @@ const UserPosts = () => {
       .then((response) => response.json())
       .then((json) => setUserPosts(json));
 
-  }, []);
+  });
 
   return (
     <>

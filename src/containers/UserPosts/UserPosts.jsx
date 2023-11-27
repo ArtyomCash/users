@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import styles from './userPosts.module.scss';
 
 const UserPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
-  // const { id } = useParams();
-  const location = useLocation();
-  const url = location.pathname.split('/');
+  const { id } = useParams();
+  // const location = useLocation();
+  // const url = location.pathname.split('/');
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts?userId=${url[2]}`)
+    fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
       .then((response) => response.json())
       .then((json) => setUserPosts(json));
 
-  });
+  }, [id]);
 
   return (
     <>

@@ -6,11 +6,10 @@ import styles from './userPosts.module.scss';
 
 const UserPosts = () => {
   // const { id } = useParams();
-
+  const location = useLocation();
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
-    const location = useLocation();
     const url = location.pathname.split('/');
 
     console.log('url', url);

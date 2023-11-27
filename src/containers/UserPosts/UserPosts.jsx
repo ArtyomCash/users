@@ -6,7 +6,6 @@ import styles from './userPosts.module.scss';
 
 const UserPosts = () => {
   const [userPosts, setUserPosts] = useState([]);
-  const [show, setShow] = useState(false);
   // const { id } = useParams();
   const location = useLocation();
   const url = location.pathname.split('/');
@@ -14,26 +13,23 @@ const UserPosts = () => {
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${url[2]}`)
       .then((response) => response.json())
       .then((json) => setUserPosts(json));
-  }, [url]);
 
-  setTimeout(() => setShow(true), 500);
+  }, []);
 
   return (
-    show && (
-      <>
-        <Header />
-        <main className={styles.userPosts}>
-          <ul>
-            {userPosts.map((post) => (
-              <li className={styles.li} key={post.id}>
-                <h3 className={styles.title}>{post.title}</h3>
-                <p className={styles.desc}>{post.body}</p>
-              </li>
-            ))}
-          </ul>
-        </main>
-      </>
-    )
+    <>
+      <Header />
+      <main className={styles.userPosts}>
+        <ul>
+          {userPosts.map((post) => (
+            <li className={styles.li} key={post.id}>
+              <h3 className={styles.title}>{post.title}</h3>
+              <p className={styles.desc}>{post.body}</p>
+            </li>
+          ))}
+        </ul>
+      </main>
+    </>
   );
 };
 

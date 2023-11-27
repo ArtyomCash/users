@@ -17,7 +17,7 @@ const UserPosts = () => {
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${url[2]}`)
       .then((response) => response.json())
       .then((json) => setUserPosts(json));
-  }, [url]);
+  });
 
   return (
     <>

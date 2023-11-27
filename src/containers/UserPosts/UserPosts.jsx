@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
 import Header from '../../components/header';
 import { useLocation } from 'react-router-dom';
 import styles from './userPosts.module.scss';
 
 const UserPosts = () => {
-  // const { id } = useParams();
-
   const location = useLocation();
   const url = location.pathname.split('/');
 

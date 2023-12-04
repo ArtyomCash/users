@@ -1,0 +1,14 @@
+@import 'src/scss/_vars.scss';
+
+.aboutUs {
+  @extend %wrapper;
+}
+.title {
+  @extend %subTitle;
+}
+.desc {
+  font-size: 18px;
+  line-height: 18px;
+  color: black;
+  margin-bottom: 32px;
+}

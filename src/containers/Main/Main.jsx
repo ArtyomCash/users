@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../components/header';
 import styles from './main.module.scss';
 
 const Main = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
 
   const [postList, setPostList] = useState(null);
@@ -21,8 +22,8 @@ const Main = () => {
     const params = new URLSearchParams();
     params.set('search', searchTerm);
     params.set('sort', sortOrder);
-    window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
-  }, [searchTerm, sortOrder, location.pathname]);
+    navigate(`${location.pathname}?${params.toString()}`);
+  }, [searchTerm, sortOrder, location.pathname, navigate]);
 
   const handleSort = () => {
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');

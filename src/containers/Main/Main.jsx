@@ -1,34 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Header from '../../components/header';
 import styles from './main.module.scss';
 
 const Main = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
   const [postList, setPostList] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+  const [sortOrder, setSortOrder] = useState(searchParams.get('sort') || 'asc');
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch(`https://jsonplaceholder.typicode.com/users?_sort=username&_order=${sortOrder}`)
       .then((response) => response.json())
       .then((json) => setPostList(json));
-  }, []);
+  }, [sortOrder]);
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    params.set('search', searchTerm);
+    params.set('sort', sortOrder);
+    window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
+  }, [searchTerm, sortOrder, location.pathname]);
 
   const handleSort = () => {
-    const sortedUsers = [...postList];
-
-    sortedUsers.sort((a, b) => {
-      const nameA = a.username.toLowerCase();
-      const nameB = b.username.toLowerCase();
-
-      if (sortOrder === 'asc') {
-        return nameA.localeCompare(nameB);
-      } else {
-        return nameB.localeCompare(nameA);
-      }
-    });
-
-    setPostList(sortedUsers);
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
   };
 
